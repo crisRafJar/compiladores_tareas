@@ -21,6 +21,7 @@ public class AnalizadorLexico {
     private static List<TokenClass> listTokensClass = new ArrayList<TokenClass>();
     static boolean error = false;
     static String lineasError = "";
+    static String mensajeError= "";
 
     
     public static List<TokenClass> procesar(String archivoFuente, String archivoTokens, String archivoSalida) throws FileNotFoundException, IOException {
@@ -67,7 +68,7 @@ public class AnalizadorLexico {
 
                 for (int n = 0; n <cadena.length(); n++){
                     char c = cadena.charAt (n);
-
+                    //Se marcan las comillas inicial y final que forman un string
                     if(c == Globales.tokenComilla){
                             esComilla = true;
                             if(comillaIni == 0){
@@ -86,18 +87,18 @@ public class AnalizadorLexico {
                     }
 
                     if(esDosPuntos && esNumero && esComa){
-                            resultado = resultado +" "+analizarToken(Globales.tokenNumber, linea);
-                            crearLista(analizarToken(Globales.tokenNumber, linea), dato);
+                            resultado = resultado +" "+analizarToken(Globales.tokenNumber, linea, 1);
+                            crearLista(analizarToken(Globales.tokenNumber, linea, 0), dato);
                             esDosPuntos = false;
                             esNumero = false;
                     }else if(esDosPuntos && !esNumero && esComa){
                             if(valor.equalsIgnoreCase(Globales.tokenBooleanTrue)){
-                                    resultado = resultado +" "+analizarToken(Globales.tokenBooleanTrue, linea);
-                                    crearLista(analizarToken(Globales.tokenBooleanTrue, linea), dato);
+                                    resultado = resultado +" "+analizarToken(Globales.tokenBooleanTrue, linea, 1);
+                                    crearLista(analizarToken(Globales.tokenBooleanTrue, linea, 0), dato);
                                     dato = "";
                             }else if(valor.equalsIgnoreCase(Globales.tokenBooleanFalse)){
-                                    resultado = resultado +" "+analizarToken(Globales.tokenBooleanFalse, linea);
-                                    crearLista(analizarToken(Globales.tokenBooleanFalse, linea), dato);
+                                    resultado = resultado +" "+analizarToken(Globales.tokenBooleanFalse, linea, 1);
+                                    crearLista(analizarToken(Globales.tokenBooleanFalse, linea, 0), dato);
                                     dato = "";
                             }
                             valor = "";
@@ -106,12 +107,12 @@ public class AnalizadorLexico {
                     }
 
                     if(((!esNumero && valor=="") | esComa) && !esComilla && comillaIni == 0 && comillaFin == 0){               	
-                            resultado = resultado +" "+ analizarToken(String.valueOf(c), linea);
+                            resultado = resultado +" "+ analizarToken(String.valueOf(c), linea, 1);
                             
-                            crearLista(analizarToken(String.valueOf(c), linea),Character.toString(c));
+                            crearLista(analizarToken(String.valueOf(c), linea, 0),Character.toString(c));
                     }else if(esComilla && comillaIni == 1 && comillaFin == 1){
-                            resultado = resultado +" "+analizarToken(Globales.tokenString, linea);
-                            crearLista(analizarToken(Globales.tokenString, linea), dato);
+                            resultado = resultado +" "+analizarToken(Globales.tokenString, linea, 1);
+                            crearLista(analizarToken(Globales.tokenString, linea, 0), dato);
                             dato = "";
                             esComilla = false;
                             comillaIni = 0;
@@ -135,29 +136,41 @@ public class AnalizadorLexico {
                 }
 
                 if(esDosPuntos && esNumero && !esComa){
-                        resultado = resultado +" "+analizarToken(Globales.tokenNumber, linea);
-                        crearLista(analizarToken(Globales.tokenNumber, linea), dato);
+                        resultado = resultado +" "+analizarToken(Globales.tokenNumber, linea, 1);
+                        crearLista(analizarToken(Globales.tokenNumber, linea, 0), dato);
                         dato = "";
                         esDosPuntos = false;
                         esNumero = false;
                 }else if(esDosPuntos && !esNumero && !esComa){
                         if(valor.equalsIgnoreCase(Globales.tokenBooleanTrue)){
-                                resultado = resultado +" "+analizarToken(Globales.tokenBooleanTrue, linea);
-                                crearLista(analizarToken(Globales.tokenBooleanTrue, linea), dato);
+                                resultado = resultado +" "+analizarToken(Globales.tokenBooleanTrue, linea, 1);
+                                crearLista(analizarToken(Globales.tokenBooleanTrue, linea, 0), dato);
                                 dato = "";
                         }else if(valor.equalsIgnoreCase(Globales.tokenBooleanFalse)){
-                                resultado = resultado +" "+analizarToken(Globales.tokenBooleanFalse, linea);
-                                crearLista(analizarToken(Globales.tokenBooleanFalse, linea), dato);
+                                resultado = resultado +" "+analizarToken(Globales.tokenBooleanFalse, linea, 1);
+                                crearLista(analizarToken(Globales.tokenBooleanFalse, linea, 0), dato);
                                 dato = "";
                         }
                         valor = "";
                         esDosPuntos = false;
 
                 }
-
-                if(esComilla && comillaIni != 1 && comillaFin != 1) resultado = resultado + " #errorComilla";
-                if(esComilla && comillaIni == 1 && comillaFin != 1) resultado = resultado + " #errorComilla";
-                if(esComilla && comillaIni != 1 && comillaFin == 1) resultado = resultado + " #errorComilla";
+                //Se analizan las comillas inicial y final que forman un string
+                if(esComilla && comillaIni != 1 && comillaFin != 1) {
+                	error = true;
+                	resultado = resultado + " #errorString";
+                    mensajeError = mensajeError + "#errorString" + " Linea " + linea + "\n";
+                }
+                if(esComilla && comillaIni == 1 && comillaFin != 1) {
+                	error = true;
+                	resultado = resultado + " #errorString";
+                    mensajeError = mensajeError + "#errorString" + " Linea " + linea + "\n";
+                }
+                if(esComilla && comillaIni != 1 && comillaFin == 1) {
+                	error = true;
+                	resultado = resultado + " #errorString";
+                    mensajeError = mensajeError + "#errorString" + " Linea " + linea + "\n";
+                }
 
                 System.out.println (resultado);
 
@@ -169,7 +182,8 @@ public class AnalizadorLexico {
         System.out.println("\n");
         
         if(error){
-        	System.out.println("Se detectó un error Léxico. Linea: " + lineasError);
+        	System.out.println("Se detectó los siguientes errores léxicos:  \n");
+        	System.out.println(mensajeError);
         }else{
         	System.out.println("LEXICAMENTE CORRECTO!!!!!!!!!");
         }
@@ -219,13 +233,14 @@ public class AnalizadorLexico {
     return tokenValue;
     }
 
-    public static String analizarToken(String token, int linea) throws FileNotFoundException, IOException {
+    public static String analizarToken(String token, int linea, int a) throws FileNotFoundException, IOException {
 
             String respuesta = buscarToken(String.valueOf(token));
 
-            if(respuesta == null){
+            if(respuesta == null && a==1){
                     respuesta = "#error";
                     error = true;
+                    mensajeError = mensajeError + "No se esperaba '" +token + "' linea " + linea + "\n";
                     if(Integer.toString(linea).indexOf(lineasError) != -1)
                     	lineasError = lineasError + " " + linea;
             }

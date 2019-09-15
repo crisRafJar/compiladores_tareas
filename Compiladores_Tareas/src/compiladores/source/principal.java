@@ -10,10 +10,10 @@ public class principal {
     private static List<TokenClass> listTokensClass = new ArrayList();
 	
 	public static void main(String[] args) throws IOException, Exception {
-
-        String archivoFuente = "C://fuente.txt";
-        String archivoTokens = "C://tokens.txt";
-        String archivoSalida = "C://output.txt";
+		/*Archivos Fuentes*/
+        String archivoFuente = "../compiladores_tareas/Compiladores_Tareas/src/compiladores/files/fuente.txt";
+        String archivoTokens = "../compiladores_tareas/Compiladores_Tareas/src/compiladores/files/tokens.txt";
+        String archivoSalida = "../compiladores_tareas/Compiladores_Tareas/src/compiladores/files/output.txt";
 
         try{
         	System.out.println("************** INICIANDO ANALISIS LEXICO.....");
