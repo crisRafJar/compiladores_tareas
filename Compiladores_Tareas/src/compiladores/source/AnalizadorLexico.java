@@ -24,8 +24,11 @@ public class AnalizadorLexico {
     static String mensajeError= "";
 
     
-    public static String procesar(String archivoFuente, String archivoTokens, String archivoSalida) throws Exception {
+    
+    public static Respuesta procesar(String archivoFuente, String archivoTokens, String archivoSalida) throws Exception {
 
+    	Respuesta respuesta = new Respuesta();
+    	
         String resultado;
         String resultado2 = "";
         String valor; 
@@ -205,7 +208,10 @@ public class AnalizadorLexico {
 
         resultado2 = resultado2 +" EOF";
         
-        return resultado2;
+        respuesta.setResultadoLexico(resultado2);
+        respuesta.setListTokenClass(listTokensClass);
+        
+        return respuesta;
     }
     
 

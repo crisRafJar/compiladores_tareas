@@ -1,0 +1,28 @@
+1 L_LLAVE    
+2       LITERAL_CADENA DOS_PUNTOS L_CORCHETE    
+3             L_LLAVE    
+4                   LITERAL_CADENA DOS_PUNTOS LITERAL_NUM COMA
+5                   LITERAL_CADENA DOS_PUNTOS LITERAL_CADENA COMA
+6                   LITERAL_CADENA DOS_PUNTOS PR_FALSE COMA
+7                   LITERAL_CADENA DOS_PUNTOS L_CORCHETE    
+8
+9                   R_CORCHETE
+10             R_LLAVE COMA
+11             L_LLAVE    
+12                   LITERAL_CADENA DOS_PUNTOS LITERAL_NUM COMA
+13                   LITERAL_CADENA DOS_PUNTOS LITERAL_CADENA COMA
+14                   LITERAL_CADENA DOS_PUNTOS PR_TRUE COMA
+15                   LITERAL_CADENA DOS_PUNTOS L_CORCHETE    
+16                         L_LLAVE    
+17                               LITERAL_CADENA DOS_PUNTOS LITERAL_CADENA COMA
+18                               LITERAL_CADENA DOS_PUNTOS LITERAL_NUM
+19                         R_LLAVE COMA
+20                         L_LLAVE    
+21                               LITERAL_CADENA DOS_PUNTOS LITERAL_CADENA COMA
+22                               LITERAL_CADENA DOS_PUNTOS LITERAL_NUM
+23                         R_LLAVE
+24                   R_CORCHETE
+25             R_LLAVE
+26       R_CORCHETE
+27 R_LLAVE
+EOF

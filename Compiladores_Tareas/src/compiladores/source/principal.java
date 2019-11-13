@@ -7,24 +7,28 @@ import java.util.Stack;
 
 public class principal {
 
-    //private static List<TokenClass> listTokensClass = new ArrayList();
 	
 	public static void main(String[] args) throws IOException, Exception {
+		Respuesta respuesta = new Respuesta();
+		
 		/*Archivos Fuentes*/
-        String archivoFuente = "../compiladores_tareas/Compiladores_Tareas/src/compiladores/files/fuente.txt";
-        String archivoTokens = "../compiladores_tareas/Compiladores_Tareas/src/compiladores/files/tokens.txt";
-        String archivoSalida = "../compiladores_tareas/Compiladores_Tareas/src/compiladores/files/output.txt";
-                
-        String resultadoLexico = "";
+        String archivoFuente = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/fuente.txt";
+        String archivoTokens = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/tokens.txt";
+        String archivoSalida = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/output.txt";
         
+        String archivoSalidaTraductor = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/outputTraductor.txt";
+                
         try{
         	System.out.println("************** INICIANDO ANALISIS LEXICO.....");
         	System.out.println("\n");
-        	resultadoLexico = AnalizadorLexico.procesar(archivoFuente, archivoTokens, archivoSalida);
+        	respuesta = AnalizadorLexico.procesar(archivoFuente, archivoTokens, archivoSalida);
         	
         	System.out.println("************** INICIANDO ANALISIS SINTACTICO.....");
         	System.out.println("\n");
-        	AnalizadorSintactico.procesar(resultadoLexico);
+        	AnalizadorSintactico.procesar(respuesta.getResultadoLexico());
+        	
+        	System.out.println("************** INICIANDO TRADUCCION JSON A XML.....");
+        	Traductor.traducir(respuesta.getListTokenClass(), archivoSalidaTraductor); 
             
         }catch(IOException ex){
             throw new IOException("Ha ocurrido un error: " + ex.getMessage());

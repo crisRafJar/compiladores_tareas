@@ -2,7 +2,7 @@
    "personas":[  
       {  
          "ci":1234567,
-         "nombre":"Julio PÃ©rez",
+         "nombre":"Julio Pérez",
          "casado":false,
          "hijos":[  
 
@@ -10,7 +10,7 @@
       },
       {  
          "ci":7654321,
-         "nombre":"Juan GÃ³mez",
+         "nombre":"Juan Gómez",
          "casado":true,
          "hijos":[  
             {  

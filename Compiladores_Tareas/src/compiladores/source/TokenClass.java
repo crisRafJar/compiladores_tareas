@@ -4,6 +4,13 @@ public class TokenClass {
 	public String tipo;
 	public String valor;
 	
+	public TokenClass() {
+	}
+	
+	public TokenClass(String tipo, String valor) {
+		this.tipo = tipo;
+		this.valor = valor;
+	}
 	public String getTipo() {
 		return tipo;
 	}
