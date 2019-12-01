@@ -12,11 +12,11 @@ public class principal {
 		Respuesta respuesta = new Respuesta();
 		
 		/*Archivos Fuentes*/
-        String archivoFuente = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/fuente.txt";
-        String archivoTokens = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/tokens.txt";
-        String archivoSalida = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/output.txt";
+        String archivoFuente = "C:/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/fuente.txt";
+        String archivoTokens = "C:/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/tokens.txt";
+        String archivoSalida = "C:/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/output.txt";
         
-        String archivoSalidaTraductor = "C:/Users/konecta/Desktop/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/outputTraductor.txt";
+        String archivoSalidaTraductor = "C:/compiladores_tareas/Compiladores_Tareas/src/compiladores/files/outputTraductor.txt";
                 
         try{
         	System.out.println("************** INICIANDO ANALISIS LEXICO.....");

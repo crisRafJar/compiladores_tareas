@@ -13,6 +13,47 @@ public class Traductor {
 	static TokenClass tokenActual = new TokenClass();
 
 	static boolean error = false;
+	
+	
+	public static void traducir(List<TokenClass> listTokensClass, String archivoSalida) throws Exception {
+		File file = new File(archivoSalida);
+
+		// Si el archivo no existe es creado
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		FileWriter fw = new FileWriter(file);
+		BufferedWriter bw = new BufferedWriter(fw);
+
+		TokenClass[] arrayTokens = new TokenClass[listTokensClass.size()];
+		int i = 0;
+		for (TokenClass token : listTokensClass) {
+			if (!token.tipo.equals(" ")) {
+				arrayTokens[i] = token;
+				i++;
+			}
+		}
+
+		for (int n = arrayTokens.length - 1; n > -1; n--) {
+			if (arrayTokens[n] != null)
+				pila.push(arrayTokens[n]);
+		}
+
+		tokenActual = pila.peek();
+
+		String resultado = "";
+
+		resultado = resultado + json();
+
+		bw.write(resultado);
+		bw.newLine();
+
+		System.out.println(resultado);
+
+		bw.close();
+	}
+	
+	
 
 	public static void getToken() {
 		try {
@@ -195,44 +236,6 @@ public class Traductor {
 	public static void error(String token, String funcion, String esperado) throws Exception {
 		error = true;
 		System.out.println("Se encontro " + token + ". Funcion: " + funcion + ". Se esperaba " + esperado + "\n");
-	}
-
-	public static void traducir(List<TokenClass> listTokensClass, String archivoSalida) throws Exception {
-		File file = new File(archivoSalida);
-
-		// Si el archivo no existe es creado
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-		FileWriter fw = new FileWriter(file);
-		BufferedWriter bw = new BufferedWriter(fw);
-
-		TokenClass[] arrayTokens = new TokenClass[listTokensClass.size()];
-		int i = 0;
-		for (TokenClass token : listTokensClass) {
-			if (!token.tipo.equals(" ")) {
-				arrayTokens[i] = token;
-				i++;
-			}
-		}
-
-		for (int n = arrayTokens.length - 1; n > -1; n--) {
-			if (arrayTokens[n] != null)
-				pila.push(arrayTokens[n]);
-		}
-
-		tokenActual = pila.peek();
-
-		String resultado = "";
-
-		resultado = resultado + json();
-
-		bw.write(resultado);
-		bw.newLine();
-
-		System.out.println(resultado);
-
-		bw.close();
 	}
 
 }
