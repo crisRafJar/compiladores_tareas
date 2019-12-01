@@ -9,3 +9,5 @@ TAREAS 1, 2, 3.
 -Analizador Lexico.
 -Analizador Sintactico.
 -Traduccion.
+
+Obs. Archivos del proyecto ubicados por defecto en el disco C:/ de windows.
