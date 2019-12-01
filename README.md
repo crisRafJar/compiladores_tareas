@@ -5,4 +5,7 @@ Cristin Rafael Jara Caceres
 
 ci 4695968
 
-TAREA 1
+TAREAS 1, 2, 3.
+-Analizador Lexico.
+-Analizador Sintactico.
+-Traduccion.
